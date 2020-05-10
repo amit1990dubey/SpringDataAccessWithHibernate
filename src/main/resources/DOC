@@ -1,0 +1,67 @@
+
+			                                                HIBERNATE
+
+			when you want to perform any persistent operation in Hibernate then you need to write the Hibernate code with
+			following steps.
+
+			1. Write persistence class.
+			2.Write the mapping document or use annotation with Persistence class.
+
+			3. client code
+			try{
+			//Take session factory
+			//Take session
+			// Begin Traction
+			// Perform persistence operation
+			//End Traction
+			//close session
+
+
+			}
+
+			catch(Exception e)
+			{
+			}
+
+			Following problem in above code
+			1/ All the above statement are there 5 common operations.
+			Writing the same cient code multiples times rapidatily.gives you code duplication problem.
+
+			2. All the method in Hibernate API are throwing common exception called org.hibernate.HibernateExeption
+			which is the checked ex because of checked Ex you nedd to write try catch blocks for every program.
+
+			3. There is no clear categorization of ex in Hibernate.
+
+
+
+			Above Problems are solved as follows
+
+			1) HibernateTemplate is provided which centralized the Hibernate clint code.
+			Usage:
+			a. hibernateRemp.save(cust);
+
+			2. InSpring DataAccess , There is one root Ex called DataAccessException which unchecked or runtime.Because
+			of unchecked ex you no need to try and catch block fro every program.
+
+			3. There is clear categorization of exception in Spring DataAccess.
+
+
+			                                   Important Method HibernateTemplate
+
+							1) Serializable save(Object)
+							2) void update(Object)
+							3) void update(Object, LockMode)
+							4)void delete(Object)
+							5) void delete(Object, LockMode)
+							6)void feleteAll(Collection)
+
+							7) Object load(class, Serilizable)
+							8)Object load(Class, Serializable,LockMode)
+							9) List loadAll(Class)
+
+							10) List find(hql)
+							11) List find(hql, Object)
+							12) List find(hql, Object[])
+							13) List findByCriteria(DetachedCriteria) - QBC
+							14) List findByCriteria(DC,int,int)
+							15) void execute(HibernateCallback hc)

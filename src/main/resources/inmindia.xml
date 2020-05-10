@@ -1,0 +1,48 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+	   http://www.springframework.org/schema/context
+	   http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+
+    <context:annotation-config />
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost/ibmdb"/>
+        <property name="username" value="root"/>
+        <property name="password" value="amit"/>
+    </bean>
+
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+
+        <property name="mappingResources">
+        <list>
+            <value>com/ibm/spring/Customer.hbm.xml</value>
+        </list>
+        </property>
+
+        <!--Hibernate uses "dialect" configuration to know which database you are using so that it can convert hibernate query to
+        database specific query. Databases implement subtle differences in the SQL they use.-->
+
+        <property name="hibernateProperties">
+            <map>
+                <entry key="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+                <entry key="hibernate.show_sql" value="true"/>
+                <entry key="hibernate.hbm2ddl.auto" value="update"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="hibernateTemp" class="org.springframework.orm.hibernate4.HibernateTemplate" autowire="constructor">
+        <property name="checkWriteOperations" value="false">
+        </property>
+    </bean>
+
+    <bean id="txManager" class="org.springframework.orm.hibernate4.HiberanteTransactionManager" autowire="constructor"/>
+    <bean id="cdao" class="com.ibm.spring.HibernateCustomerDAO"/>
+
+</beans>
