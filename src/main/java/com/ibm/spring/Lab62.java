@@ -22,7 +22,16 @@ public class Lab62 {
         CustomerTO cto1 = new CustomerTO(484,"vyankat","v@ibm.com",87767676,"Bangalore");
         cdao.addCustomer(cto1);
 
-        //3.
+        //3. delete Customer
+        cdao.deleteCustomer(477);
+        System.out.println("Check Your Database");
+
+        //4. grtCustomerByCid
+        System.out.println("getCustomerByCid");
+        cto = cdao.getCustomerByCid(481);
+        System.out.println(cto);
+
+
 
 
 
