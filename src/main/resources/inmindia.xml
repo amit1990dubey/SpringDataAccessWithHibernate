@@ -16,7 +16,7 @@
         <property name="password" value="amit"/>
     </bean>
 
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
 
         <property name="mappingResources">
@@ -37,12 +37,12 @@
         </property>
     </bean>
 
-    <bean id="hibernateTemp" class="org.springframework.orm.hibernate4.HibernateTemplate" autowire="constructor">
+    <bean id="hibernateTemplate" class="org.springframework.orm.hibernate5.HibernateTemplate" autowire="constructor">
         <property name="checkWriteOperations" value="false">
         </property>
     </bean>
 
-    <bean id="txManager" class="org.springframework.orm.hibernate4.HiberanteTransactionManager" autowire="constructor"/>
+    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager" autowire="constructor"/>
     <bean id="cdao" class="com.ibm.spring.HibernateCustomerDAO"/>
 
 </beans>

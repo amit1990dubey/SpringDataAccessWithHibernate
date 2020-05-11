@@ -11,12 +11,14 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HibernateCustomerDAO implements  CustomerDAO {
+public class HibernateCustomerDAO implements CustomerDAO {
+
+
     @Autowired
     HibernateTemplate hibernateTemplate;
 
     @Autowired
-    HibernateTransactionManager transactionManager = null;
+    HibernateTransactionManager transactionManager;
 
     public void addCustomer(CustomerTO cto)
     {
